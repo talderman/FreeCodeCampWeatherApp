@@ -18,19 +18,17 @@ $(document).ready(function () {
       var tempf = toFar(Math.round(data.main.temp));
       var tempc = toCel(Math.round(data.main.temp));
       var weatherDescription = data.weather[0].description;
-      var tempFahrenheitContent = +tempf + ' °F'
+      var tempFahrenheitContent = +tempf + ' °F';
       var iconHTML = getIconUrl(data.weather[0].icon);
-
+      setBackgroundImageFromIconId(data.weather[0].icon);
       fahrenheitContent.innerHTML = tempFahrenheitContent;
-      currentConditions.innerHTML = capitalizeFirstLetter(weatherDescription);
+      currentConditions.innerHTML =  weatherDescription.replace(/\b./g, function(m){ return m.toUpperCase(); });
       weatherIconTag.src = iconHTML;
     });
-  };
-
+  }
   function error() {
     output.innerHTML = "Unable to retrieve your location";
-  };
-
+  }
   navigator.geolocation.getCurrentPosition(getWeatherInfo, error);
 });
 
@@ -43,40 +41,49 @@ function toCel(t) {
 }
 
 function getIconUrl(iconId) {
+  console.log(iconId);
   return 'http://openweathermap.org/img/w/' + iconId + '.png'
 }
 
-function getBackgroundImageUrl(iconId) {
-  var backgroundImageUrl = '';
+function setBackgroundImageFromIconId(iconId) {
 
-  switch (iconId) {
-    case '01d':
-      return '';
-      break;
-    case '01n':
-      return '';
-      break;
-    case '02d':
-      return '';
-      break;
-    case '02n':
-      return '';
-      break;
-    case '03d':
-      return '';
-      break;
-    case '03n':
-      return '';
-      break;
-
-    default:
-      return '';
-      break;
-
+  if (iconId === '01d') {
+    $('#bg').css("background-image", 'url("images/BlueSky.jpg")');
+  } else if (iconId === '01n') {
+    $('#bg').css("background-image", 'url("images/ClearNight.jpg")');
+  } else if (iconId === '02d') {
+    $('#bg').css("background-image", 'url("images/Clouds.jpg")');
+  } else if (iconId === '02n') {
+    $('#bg').css("background-image", 'url("images/CloudsNight.jpg")');
+  } else if (iconId === '03d') {
+    $('#bg').css("background-image", 'url("images/Clouds.jpg")');
+  } else if (iconId === '03n') {
+    $('#bg').css("background-image", 'url("images/CloudsNight.jpg")');
+  } else if (iconId === '04d') {
+    $('#bg').css("background-image", 'url("images/Clouds.jpg")');
+  } else if (iconId === '04n') {
+    $('#bg').css("background-image", 'url("images/CloudsNight.jpg")');
+  } else if (iconId === '09d') {
+    $('#bg').css("background-image", 'url("images/Rain.jpg")');
+  } else if (iconId === '09n') {
+    $('#bg').css("background-image", 'url("images/Clouds.jpg")');
+  } else if (iconId === '10d') {
+    $('#bg').css("background-image", 'url("images/Rain.jpg")');
+  } else if (iconId === '10n') {
+    $('#bg').css("background-image", 'url("images/Clouds.jpg")');
+  } else if (iconId === '11d') {
+    $('#bg').css("background-image", 'url("images/Clouds.jpg")');
+  } else if (iconId === '11n') {
+    $('#bg').css("background-image", 'url("images/Clouds.jpg")');
+  } else if (iconId === '13d') {
+    $('#bg').css("background-image", 'url("images/Snow.jpg")');
+  } else if (iconId === '13n') {
+    $('#bg').css("background-image", 'url("images/SnowNight.jpg")');
+  } else if (iconId === '14d') {
+    $('#bg').css("background-image", 'url("images/Rain.jpg")');
+  } else if (iconId === '15n') {
+    $('#bg').css("background-image", 'url("images/Rain.jpg")');
+  } else {
+    $('#bg').css("background-image", 'url("images/Black.jpg")');
   }
-  return '';
-}
-
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
 }
